@@ -8,8 +8,12 @@ public class Cadete
     private string telefono;
     private List<Pedidos> listaPedidos;
 
-    public Cadete()
+    public Cadete(int id, string nombre, string direccion, string telefono)
     {
+        this.id = id;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
         listaPedidos = new List<Pedidos>();
     }
 }

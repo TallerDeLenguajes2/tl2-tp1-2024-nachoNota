@@ -1,11 +1,11 @@
 ﻿using System;
 
-pubic enum estado
+public enum estado
 {
     Cancelado,
     Pendiente,
     Entregado
-}
+};
 
 public class Pedidos
 {
