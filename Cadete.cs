@@ -3,22 +3,33 @@
 public class Cadete
 {
     private int id;
-    private string nombre;
     private string direccion;
     private string telefono;
-    private List<Pedidos> listaPedidos;
+    private string nombre;
+
+    public List<Pedidos> ListaPedidos { get; set; }
 
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
         this.id = id;
-        this.nombre = nombre;
+        Nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        listaPedidos = new List<Pedidos>();
+        ListaPedidos = new List<Pedidos>();
+    }
+    
+    public int VerIdCadete()
+    {
+        return id;
+    }
+
+    public string VerNombreCadete()
+    {
+        return nombre;
     }
 
     public void AñadirPedido(Pedidos pedido)
     {
-        listaPedidos.Add(pedido);
+        ListaPedidos.Add(pedido);
     }
 }
