@@ -16,4 +16,9 @@ public class Cadete
         this.telefono = telefono;
         listaPedidos = new List<Pedidos>();
     }
+
+    public void AñadirPedido(Pedidos pedido)
+    {
+        listaPedidos.Add(pedido);
+    }
 }

@@ -4,13 +4,17 @@ public class Cadeteria
 {
     private string nombre;
     private string telefono;
-    private List<Cadete> listaCadetes;
 
-    //public string nombre { get; set; }
+    public List<Cadete> listaCadetes {  get; set; }
 
     public Cadeteria()
     {
         listaCadetes = new List<Cadete>();
+    }
+
+    public void AsignarPedido(int nroCadete, Pedidos pedido)
+    {
+        listaCadetes[nroCadete].AñadirPedido(pedido);
     }
 
     public void CargarCadeteria(string rutaCadeteria, string rutaCadetes)
