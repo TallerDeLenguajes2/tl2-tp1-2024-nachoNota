@@ -74,16 +74,17 @@ class Program
 
                     if (pedido)
                     {
-                        Console.WriteLine($"Pedido encontrado, su estado actual es {pedido.Estado}, a cual quieres cambiarlo?");
+                        Console.WriteLine($"Pedido encontrado, su estado actual es {pedido.VerEstado()}, a cual quieres cambiarlo?");
                         Console.WriteLine("1 - Entregado");
                         Console.WriteLine("2 - Cancelado");
                         int eleccionEstado = int.Parse(Console.ReadLine());
                         switch (eleccionEstado)
                         {
-                            case 1:
-                                pedido.Estado = estado.Entregado;
+                            case 1: pedido.CambiarEstado(estado.Entregado);
+                                Cadeteria.PagarCadete(pedido);
+
                                 break;
-                            case 2: pedido.Estado = estado.Cancelado;
+                            case 2: pedido.CambiarEstado(estado.Cancelado);
                                 break;
                         }
                     }
@@ -117,6 +118,9 @@ class Program
             seguir = int.Parse(Console.ReadLine());
 
         } while (seguir != 1);
+
+
+
     }
 
     private static void MostrarPedidosPendientes(Cadeteria cadeteria)

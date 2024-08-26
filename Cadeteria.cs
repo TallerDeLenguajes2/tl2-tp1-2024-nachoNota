@@ -24,13 +24,31 @@ public class Cadeteria
         {
             foreach (var pedido in cadete.ListaPedidos)
             {
-                if (nroPedido == pedido.Numero)
+                if (nroPedido == pedido.VerNumero())
                 {
                     return pedido;   
                 }
             }
         }
         return null;
+    }
+
+    public void PagarCadete(Pedidos pedido)
+    {
+        Cadete cadete = EncontrarCadetePorPedido(pedido);
+        if(cadete == null)
+        {
+            Console.WriteLine("No se encontro el cadete");
+        }
+        else
+        {
+            cadete.RecibirPago();
+        }
+    }
+
+    public Cadete EncontrarCadetePorPedido(Pedidos pedido)
+    {
+        return ListaCadetes.Find(cadete => cadete.ListaPedidos.Contains(pedido))
     }
 
     public void MostrarCadetes()

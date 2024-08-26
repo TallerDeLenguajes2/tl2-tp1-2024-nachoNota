@@ -6,6 +6,7 @@ public class Cadete
     private string direccion;
     private string telefono;
     private string nombre;
+    private decimal recaudadoDia;
 
     public List<Pedidos> ListaPedidos { get; set; }
 
@@ -15,6 +16,7 @@ public class Cadete
         Nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        recaudadoDia = 0;
         ListaPedidos = new List<Pedidos>();
     }
     
@@ -26,6 +28,11 @@ public class Cadete
     public string VerNombreCadete()
     {
         return nombre;
+    }
+
+    public void RecibirPago()
+    {
+        recaudadoDia += 500;
     }
 
     public void AñadirPedido(Pedidos pedido)
