@@ -5,7 +5,7 @@ using System.Linq;
 Console.Clear();
 
 var Cadeteria = new Cadeteria();
-Cadeteria.CargarCadeteria("Cadeteria.csv", "Cadetes.csv");
+Cadeteria.CargarCadeteria(@"ArchivosCsv\Cadeteria.csv", @"ArchivosCsv\Cadetes.csv");
 
 Pedidos NuevoPedido = null;
 int opcion = 0;
