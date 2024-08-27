@@ -13,18 +13,18 @@ public class Pedidos
     private estado estado;
     private int numero;
 
-    public Cliente Cliente { get; set; }
+    private Cliente cliente;
 
     public Pedidos(string observacion, string nombre, string direccion, string telefono, string datosReferenciaDireccion)
     {
-        Numero = new Random().Next(0, 100000); //simulo una eleccion de numero unico para el pedido, ya se que puede repetirse pero bueno
+        this.numero = new Random().Next(0, 100000); //simulo una eleccion de numero unico para el pedido, ya se que puede repetirse pero bueno
         this.observacion = observacion;
         this.estado = estado.Pendiente;
 
-        Cliente = new Cliente(nombre, direccion, telefono, datosReferenciaDireccion);
+        cliente = new Cliente(nombre, direccion, telefono, datosReferenciaDireccion);
     }
 
-    public string VerEstado()
+    public estado VerEstado()
     {
         return estado;
     }
@@ -32,6 +32,11 @@ public class Pedidos
     public int VerNumero()
     {
         return numero;
+    }
+
+    public Cliente VerCliente()
+    {
+        return cliente;
     }
 
     public void CambiarEstado(estado estado)

@@ -15,7 +15,7 @@ public class Cliente
 		this.datosReferenciaDireccion = datosReferenciaDireccion;
 	}
 
-	public string VerNombreCliente()
+	public string VerNombre()
 	{
 		return nombre;
 	}

@@ -5,9 +5,8 @@ una relacion por agregacion, debido a cada pedido puede ser reasignado a otro ca
 relacion de composicion, ya que si se elimina la cadeteria entonces el cadete tambien tendria que eliminarse
 
 ### ¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?
-Sé que no es un método, pero yo le agregaría a la clase Cadete un atributo llamado recaudadoDia, que lleve un recuento de cuanto lleva recaudado durante el dia con sus pedidos completados
-En cuanto a los metodos, Cadete puede tener algunos como para añadir el pedido a su lista de pedidos, otro para sumarle los $500 recaudados por pedido completado, y otros como para hacer visibles los datos del cadete sin poner los atributos publicos.
-En la Cadeteria podriamos poner metodos para asignar un pedido a un cadete (para no crear un objeto Cadete fuera de la clase Cadeteria), otro para saber si hay que pagarle al cadete, etc.
+En cuanto a los metodos, Cadete puede tener algunos como para añadir el pedido a su lista de pedidos, otros como para hacer visibles los datos del cadete sin poner los atributos publicos.
+En la Cadeteria podriamos poner metodos para asignar un pedido a un cadete (para no crear un objeto Cadete fuera de la clase Cadeteria), otro para cargar la informacion de los cadetes, para encontrar un cadete por el numero del pedido, etc.
 
 ### Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos, propiedades y métodos deberían ser públicos y cuáles privados.
 Con estos principios, los atributos deberian ser privados, siendo posible acceder a ellos a traves de metodos publicos

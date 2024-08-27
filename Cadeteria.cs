@@ -33,29 +33,16 @@ public class Cadeteria
         return null;
     }
 
-    public void PagarCadete(Pedidos pedido)
-    {
-        Cadete cadete = EncontrarCadetePorPedido(pedido);
-        if(cadete == null)
-        {
-            Console.WriteLine("No se encontro el cadete");
-        }
-        else
-        {
-            cadete.RecibirPago();
-        }
-    }
-
     public Cadete EncontrarCadetePorPedido(Pedidos pedido)
     {
-        return ListaCadetes.Find(cadete => cadete.ListaPedidos.Contains(pedido))
+        return ListaCadetes.Find(cadete => cadete.ListaPedidos.Contains(pedido));
     }
 
     public void MostrarCadetes()
     {
         foreach(var cadete in ListaCadetes)
         {
-            Console.WriteLine($"{cadete.VerIdCadete()} | {cadete.VerNombreCadete()}");
+            Console.WriteLine($"{cadete.VerId()} | {cadete.VerNombre()}");
         }
     }
 
@@ -77,6 +64,20 @@ public class Cadeteria
             string[] datos = linea.Split(',');
             var nuevoCadete = new Cadete(int.Parse(datos[0]), datos[1], datos[2], datos[3]);
             ListaCadetes.Add(nuevoCadete);
+        }
+    }
+
+    public void MostrarPedidosPendientes()
+    {
+        foreach (var cadete in ListaCadetes)
+        {
+            foreach (var pedido in cadete.ListaPedidos)
+            {
+                if (pedido.VerEstado() == estado.Pendiente)
+                {
+                    Console.WriteLine($"Nro: {pedido.VerNumero()}, Nombre del cliente: {pedido.VerCliente().VerNombre()}, Cadete: {cadete.VerNombre()}");
+                }
+            }
         }
     }
 }
