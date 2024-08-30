@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices.Marshalling;
+using Microsoft.VisualBasic;
 
 public class Cadeteria
 {
@@ -8,9 +10,37 @@ public class Cadeteria
 
     public List<Cadete> ListaCadetes {  get; set; }
 
+    public List<Pedidos> ListaPedidos { get; set; }
+
     public Cadeteria()
     {
         ListaCadetes = new List<Cadete>();
+        ListaPedidos = new List<Pedidos>();
+    }
+
+    public int JornalACobrar(int idCadete)
+    {
+        int cont = 0;
+        var cadete = ListaCadetes.Find(c => c.VerId() == idCadete);
+        
+        foreach(var pedido in ListaPedidos)
+        {
+            if(pedido.VerIdCadete() == idCadete)
+            {
+                if(pedido.VerEstado() == estado.Entregado)
+                {
+                    cont += 500;
+                }
+            }
+        }
+
+        return cont;
+    }
+
+    public void AsignarCadeteAPedido(int idCadete, int idPedido)
+    {
+        var pedido = ListaPedidos.Find(p => p.VerNumero() == idPedido);
+        pedido.AsignarCadete(idCadete);
     }
 
     public void AsignarPedido(int nroCadete, Pedidos pedido)

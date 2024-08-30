@@ -7,7 +7,7 @@ public class Cadete
     private string telefono;
     private string nombre;
 
-    public List<Pedidos> ListaPedidos { get; set; }
+    
 
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
@@ -15,7 +15,6 @@ public class Cadete
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        ListaPedidos = new List<Pedidos>();
     }
     
     public int VerId()
@@ -26,10 +25,5 @@ public class Cadete
     public string VerNombre()
     {
         return nombre;
-    }
-
-    public void AñadirPedido(Pedidos pedido)
-    {
-        ListaPedidos.Add(pedido);
     }
 }
