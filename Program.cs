@@ -8,9 +8,8 @@ var Cadeteria = new Cadeteria();
 Cadeteria.CargarCadeteria(@"ArchivosCsv\Cadeteria.csv", @"ArchivosCsv\Cadetes.csv");
 
 int opcion = 0;
-int cont = 0;
 
-while(cont <= 10) //simulo unos 10 pedidos entregados
+while(true)
 {
     Console.WriteLine("----- MENU -----");
     Console.WriteLine("1- Dar de alta pedidos");
@@ -42,20 +41,68 @@ while(cont <= 10) //simulo unos 10 pedidos entregados
             Pedidos NuevoPedido = new Pedidos(Observacion, Nombre, Direccion, Telefono, DatosRef);
 
             Cadeteria.AgregarPedido(NuevoPedido);
+            
+            break;
 
         case 2:
             var idCadete = Cadeteria.IdCadeteAleatorio();
             var idPedido = Cadeteria.IdPedidoPendiente();
+            
             if(idPedido != -1)
             {
                 Cadeteria.AsignarCadeteAPedido(idCadete, idPedido);
+                Console.WriteLine("Pedido asignado con exito");
             }
             else
             {
                 Console.WriteLine("No existen pedidos para ser asignados");
             }
                 
-                
+            break;
+
+        case 3:
+            Cadeteria.MostrarPedidosPendientes();
+            Console.WriteLine("A qué pedido le quiere cambiar el estado? Ingrese su numero: ");
+            int numero = int.Parse(Console.ReadLine());
+
+            if (Cadeteria.ExistePedido(numero))
+            {
+                Cadeteria.CambiarEstadoPedido(numero);
+            }
+            else
+            {
+                Console.WriteLine("El numero ingresado no corresponde a ningun pedido");
+            }
+
+            break;
+
+        case 4:
+            Cadeteria.MostrarPedidosPendientes();
+
+            Console.WriteLine("Elija numero del pedido a reasignar: ");
+            int NumeroPedido = int.Parse(Console.ReadLine());
+
+            if (Cadeteria.ExistePedido(NumeroPedido))
+            {
+                Cadeteria.MostrarCadetes();
+                Console.WriteLine("A que cadete le quiere asignar el pedido? Ingresar su Id: ");
+                int IdCadete = int.Parse(Console.ReadLine());
+
+                if (Cadeteria.ExisteCadete(IdCadete))
+                {
+                    Cadeteria.ReasignarPedido(NumeroPedido, IdCadete);
+                }
+                else
+                {
+                    Console.WriteLine("El id ingresado no corresponde a ningun cadete");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("El numero ingresado no corresponde a ningun pedido");
+            }
+
             break;
     }
 }

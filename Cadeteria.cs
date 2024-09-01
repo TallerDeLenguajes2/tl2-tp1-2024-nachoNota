@@ -62,38 +62,65 @@ public class Cadeteria
 
     public int IdPedidoPendiente()
     {
-        if(ListaPedidos.Count > 0)
+        var pedidoPendiente = ListaPedidos.FirstOrDefault(p => p.VerEstado() == estado.Pendiente);
+
+        if(pedidoPendiente != null)
         {
-            return ListaPedidos[0].VerNumero();
-        } else
+            return pedidoPendiente.VerNumero();
+        }
+        else
         {
             return -1;
         }
     }
 
-    public void AsignarPedido(int nroCadete, Pedidos pedido)
+    public void ReasignarPedido(int numeroPedido, int idCadete)
     {
-        ListaCadetes[nroCadete].AñadirPedido(pedido);
+        var pedido = ListaPedidos.Find(p => p.VerNumero() == numeroPedido);
+        pedido.AsignarCadete(idCadete);
     }
 
-    public Pedidos EncontrarPedido(int nroPedido)
+    public void CambiarEstadoPedido(int numero)
     {
-        foreach (var cadete in ListaCadetes)
+        var pedido = ListaPedidos.Find(p => p.VerNumero() == numero);
+
+        Console.WriteLine($"Su estado actual es {pedido.VerEstado()}, cual será su nuevo estado?");
+        Console.WriteLine("0 = Cancelado");
+        Console.WriteLine("1 = Entregado");
+        Console.Write("Opcion: ");
+        int opcion = int.Parse(Console.ReadLine());
+
+        switch (opcion)
         {
-            foreach (var pedido in cadete.ListaPedidos)
+            case 0:
+                pedido.CambiarEstado(estado.Cancelado);
+                break;
+            case 1:
+                pedido.CambiarEstado(estado.Entregado);
+                break;
+        }
+    }
+
+    public bool ExistePedido(int numero)
+    {
+        return ListaPedidos.Any(p => p.VerNumero() == numero);
+    }
+
+    public bool ExisteCadete(int id)
+    {
+        return ListaCadetes.Any(c => c.VerId() == id);
+    }
+
+    public void MostrarPedidosPendientes()
+    {
+        foreach (var pedido in ListaPedidos)
+        {
+            if (pedido.VerEstado() == estado.Pendiente)
             {
-                if (nroPedido == pedido.VerNumero())
-                {
-                    return pedido;   
-                }
+                Console.WriteLine($"Numero: {pedido.VerNumero()}, Cliente: {pedido.VerCliente().VerNombre()} | " +
+                    $"Cadete: {(pedido.VerIdCadete() != null ? "Asignado" : "Sin Asignar")}");
             }
         }
-        return null;
-    }
-
-    public Cadete EncontrarCadetePorPedido(Pedidos pedido)
-    {
-        return ListaCadetes.Find(cadete => cadete.ListaPedidos.Contains(pedido));
     }
 
     public void MostrarCadetes()
@@ -125,17 +152,4 @@ public class Cadeteria
         }
     }
 
-    public void MostrarPedidosPendientes()
-    {
-        foreach (var cadete in ListaCadetes)
-        {
-            foreach (var pedido in cadete.ListaPedidos)
-            {
-                if (pedido.VerEstado() == estado.Pendiente)
-                {
-                    Console.WriteLine($"Nro: {pedido.VerNumero()}, Nombre del cliente: {pedido.VerCliente().VerNombre()}, Cadete: {cadete.VerNombre()}");
-                }
-            }
-        }
-    }
 }

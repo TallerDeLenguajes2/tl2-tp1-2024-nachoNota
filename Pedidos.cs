@@ -12,7 +12,6 @@ public class Pedidos
     private string observacion;
     private estado estado;
     private int numero;
-
     private Cliente cliente;
     
     private int idCadete;
