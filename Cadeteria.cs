@@ -8,8 +8,7 @@ public class Cadeteria
     private string nombre;
     private string telefono;
 
-    public List<Cadete> ListaCadetes {  get; set; }
-
+    public List<Cadete> ListaCadetes { get; set; }
     public List<Pedidos> ListaPedidos { get; set; }
 
     public Cadeteria()
@@ -41,6 +40,35 @@ public class Cadeteria
     {
         var pedido = ListaPedidos.Find(p => p.VerNumero() == idPedido);
         pedido.AsignarCadete(idCadete);
+    }
+
+    public void AgregarPedido(Pedidos pedido)
+    {
+        ListaPedidos.Add(pedido);
+    }
+
+    private Cadete CadeteAleatorio()
+    {
+        var indexRandom = new Random().Next(ListaCadetes.Count);
+        var cadete = ListaCadetes[indexRandom];
+        return cadete;
+    }
+
+    public int IdCadeteAleatorio()
+    {
+        var cadete = CadeteAleatorio();
+        return cadete.VerId();
+    }
+
+    public int IdPedidoPendiente()
+    {
+        if(ListaPedidos.Count > 0)
+        {
+            return ListaPedidos[0].VerNumero();
+        } else
+        {
+            return -1;
+        }
     }
 
     public void AsignarPedido(int nroCadete, Pedidos pedido)

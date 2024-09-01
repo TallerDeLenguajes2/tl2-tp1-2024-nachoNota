@@ -7,8 +7,6 @@ public class Cadete
     private string telefono;
     private string nombre;
 
-    
-
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
         this.id = id;
