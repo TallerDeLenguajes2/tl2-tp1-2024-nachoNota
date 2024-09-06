@@ -108,7 +108,7 @@ while(true)
 
             if (Cadeteria.ExistePedido(NumeroPedido))
             {
-                Cadeteria.MostrarCadetes();
+                Cadeteria.MostrarCadetes(Cadeteria.ConsultarCantCadetes());
                 Console.WriteLine("A que cadete le quiere asignar el pedido? Ingresar su Id: ");
                 int IdCadete = int.Parse(Console.ReadLine());
 

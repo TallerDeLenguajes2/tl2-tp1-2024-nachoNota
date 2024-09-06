@@ -22,12 +22,9 @@ public class Cadeteria
         listaPedidos = new List<Pedidos>();
     }
 
-    public string NombreCadeteria(){
-        return nombre;
-    }
-
-public string TelefonoCadeteria(){
-        return telefono;
+    public int ConsultarCantCadetes()
+    {
+        return listaCadetes.Count;
     }
 
     public int JornalACobrar(int idCadete)
@@ -142,12 +139,17 @@ public string TelefonoCadeteria(){
         }
     }
 
-    public void MostrarCadetes()
+    public string[] MostrarCadetes(int tamaArreglo)
     {
+        
+        string[] listaCadetesString = new string[tamaArreglo];
+        int i = 0;
         foreach(var cadete in listaCadetes)
         {
-            Console.WriteLine($"{cadete.VerId()} | {cadete.VerNombre()}");
+            listaCadetesString[i] = $"{cadete.VerId()} |  {cadete .VerNombre()}";
+            i++;
         }
-    }
 
+        return listaCadetesString;
+    }
 }
