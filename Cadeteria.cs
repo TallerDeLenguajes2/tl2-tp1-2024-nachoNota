@@ -1,11 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices.Marshalling;
+using System.Text.Json.Serialization;
 using Microsoft.VisualBasic;
 
 public class Cadeteria
 {
+    [JsonInclude]
     private string nombre;
+    [JsonInclude]
     private string telefono;
 
     private List<Cadete> listaCadetes;
@@ -17,6 +20,14 @@ public class Cadeteria
         this.telefono = telefono;
         listaCadetes = new List<Cadete>();
         listaPedidos = new List<Pedidos>();
+    }
+
+    public string NombreCadeteria(){
+        return nombre;
+    }
+
+public string TelefonoCadeteria(){
+        return telefono;
     }
 
     public int JornalACobrar(int idCadete)
@@ -49,9 +60,9 @@ public class Cadeteria
         listaPedidos.Add(pedido);
     }
 
-    public void AgregarCadete(string id, string nombre, string direccion, string telefono)
+    public void AgregarCadete(int id, string nombre, string direccion, string telefono)
     {
-        var nuevoCadete = new Cadete(int.Parse(id, nombre, direccion, telefono);
+        var nuevoCadete = new Cadete(id, nombre, direccion, telefono);
         listaCadetes.Add(nuevoCadete);
     }
 
@@ -126,7 +137,7 @@ public class Cadeteria
             if (pedido.VerEstado() == estado.Pendiente)
             {
                 Console.WriteLine($"Numero: {pedido.VerNumero()}, Cliente: {pedido.VerCliente().VerNombre()} | " +
-                    $"Cadete: {(pedido.VerIdCadete() != null ? "Asignado" : "Sin Asignar")}");
+                    $"Cadete: {(pedido.VerIdCadete() >= 0 ? "Asignado" : "Sin Asignar")}");
             }
         }
     }
