@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "Nombre": "Juan Perez",
+    "Direccion": "Calle Falsa 123",
+    "Telefono": "555-1234"
+  },
+  {
+    "Id": 2,
+    "Nombre": "Ana Gómez",
+    "Direccion": "Avenida Siempre Viva 456",
+    "Telefono": "555-5678"
+  },
+  {
+    "Id": 3,
+    "Nombre": "Carlos Ruiz",
+    "Direccion": "Calle Mayor 789",
+    "Telefono": "555-9012"
+  },
+  {
+    "Id": 4,
+    "Nombre": "Lucía Fernández",
+    "Direccion": "Avenida Central 321",
+    "Telefono": "555-3456"
+  },
+  {
+    "Id": 5,
+    "Nombre": "Mario Sánchez",
+    "Direccion": "Calle Secundaria 654",
+    "Telefono": "555-7890"
+  },
+  {
+    "Id": 6,
+    "Nombre": "Elena Díaz",
+    "Direccion": "Avenida Principal 987",
+    "Telefono": "555-2345"
+  },
+  {
+    "Id": 7,
+    "Nombre": "Roberto Morales",
+    "Direccion": "Calle Pequeña 456",
+    "Telefono": "555-6789"
+  },
+  {
+    "Id": 8,
+    "Nombre": "Laura Martínez",
+    "Direccion": "Boulevard Sur 123",
+    "Telefono": "555-0123"
+  }
+]

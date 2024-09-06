@@ -3,33 +3,34 @@ using System.IO;
 using System.Text.Json;
 
 
-public class AccesoADatos
+public abstract class AccesoADatos
 {
-	public virtual string LeerArchivo(string rutaArchivo) { }
+	public abstract void CargarCadeteria(string rutaCadeteria, string rutaCadetes);
 }
 
 public class AccesoCSV : AccesoADatos
 {
-    public override string LeerArchivo(string rutaArchivo)
+    public override void CargarCadeteria(string rutaCadeteria, string rutaCadetes)
     {
+        string[] datos = File.ReadAllText(rutaCadeteria).Split(',');
+        var cadeteria = new Cadeteria(datos[0], datos[1]);
 
-        return ;
+        string[] lineas = File.ReadAllLines(rutaCadetes);
+        foreach (var linea in lineas)
+        {
+            string[] datos = linea.Split(',');
+            cadeteria.AgregarCadete(datos[0], datos[1], datos[2], datos[3]);
+        }
     }
 }
 
 public class AccesoJson : AccesoADatos
 {
-    public override string LeerArchivo(string rutaArchivo)
+    public override void CargarCadeteria(string rutaCadeteria, string rutaCadetes)
     {
-        string linea;
-        using (FileStream archivo = new FileStream(rutaArchivo, File.Open))
-        {
-            using (StreamReader st = new StreamReader(archivo))
-            {
-                linea = sr.ReadToEnd();
-                sr.Close();
-            }
-        }
-    |   return linea;
+        var cadeteria = JsonSerializer.Deserialize<Cadeteria>(rutaCadeteria);
+
+
+        
     }
 }

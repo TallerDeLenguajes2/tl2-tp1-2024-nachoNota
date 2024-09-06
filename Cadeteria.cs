@@ -8,21 +8,23 @@ public class Cadeteria
     private string nombre;
     private string telefono;
 
-    public List<Cadete> ListaCadetes { get; set; }
-    public List<Pedidos> ListaPedidos { get; set; }
+    private List<Cadete> listaCadetes;
+    private List<Pedidos> listaPedidos; 
 
-    public Cadeteria()
+    public Cadeteria(string nombre, string telefono)
     {
-        ListaCadetes = new List<Cadete>();
-        ListaPedidos = new List<Pedidos>();
+        this.nombre = nombre;
+        this.telefono = telefono;
+        listaCadetes = new List<Cadete>();
+        listaPedidos = new List<Pedidos>();
     }
 
     public int JornalACobrar(int idCadete)
     {
         int cont = 0;
-        var cadete = ListaCadetes.Find(c => c.VerId() == idCadete);
+        var cadete = listaCadetes.Find(c => c.VerId() == idCadete);
         
-        foreach(var pedido in ListaPedidos)
+        foreach(var pedido in listaPedidos)
         {
             if(pedido.VerIdCadete() == idCadete)
             {
@@ -38,19 +40,25 @@ public class Cadeteria
 
     public void AsignarCadeteAPedido(int idCadete, int idPedido)
     {
-        var pedido = ListaPedidos.Find(p => p.VerNumero() == idPedido);
+        var pedido = listaPedidos.Find(p => p.VerNumero() == idPedido);
         pedido.AsignarCadete(idCadete);
     }
 
     public void AgregarPedido(Pedidos pedido)
     {
-        ListaPedidos.Add(pedido);
+        listaPedidos.Add(pedido);
+    }
+
+    public void AgregarCadete(string id, string nombre, string direccion, string telefono)
+    {
+        var nuevoCadete = new Cadete(int.Parse(id, nombre, direccion, telefono);
+        listaCadetes.Add(nuevoCadete);
     }
 
     private Cadete CadeteAleatorio()
     {
-        var indexRandom = new Random().Next(ListaCadetes.Count);
-        var cadete = ListaCadetes[indexRandom];
+        var indexRandom = new Random().Next(listaCadetes.Count);
+        var cadete = listaCadetes[indexRandom];
         return cadete;
     }
 
@@ -62,7 +70,7 @@ public class Cadeteria
 
     public int IdPedidoPendiente()
     {
-        var pedidoPendiente = ListaPedidos.FirstOrDefault(p => p.VerEstado() == estado.Pendiente);
+        var pedidoPendiente = listaPedidos.FirstOrDefault(p => p.VerEstado() == estado.Pendiente);
 
         if(pedidoPendiente != null)
         {
@@ -76,13 +84,13 @@ public class Cadeteria
 
     public void ReasignarPedido(int numeroPedido, int idCadete)
     {
-        var pedido = ListaPedidos.Find(p => p.VerNumero() == numeroPedido);
+        var pedido = listaPedidos.Find(p => p.VerNumero() == numeroPedido);
         pedido.AsignarCadete(idCadete);
     }
 
     public void CambiarEstadoPedido(int numero)
     {
-        var pedido = ListaPedidos.Find(p => p.VerNumero() == numero);
+        var pedido = listaPedidos.Find(p => p.VerNumero() == numero);
 
         Console.WriteLine($"Su estado actual es {pedido.VerEstado()}, cual será su nuevo estado?");
         Console.WriteLine("0 = Cancelado");
@@ -103,17 +111,17 @@ public class Cadeteria
 
     public bool ExistePedido(int numero)
     {
-        return ListaPedidos.Any(p => p.VerNumero() == numero);
+        return listaPedidos.Any(p => p.VerNumero() == numero);
     }
 
     public bool ExisteCadete(int id)
     {
-        return ListaCadetes.Any(c => c.VerId() == id);
+        return listaCadetes.Any(c => c.VerId() == id);
     }
 
     public void MostrarPedidosPendientes()
     {
-        foreach (var pedido in ListaPedidos)
+        foreach (var pedido in listaPedidos)
         {
             if (pedido.VerEstado() == estado.Pendiente)
             {
@@ -125,30 +133,9 @@ public class Cadeteria
 
     public void MostrarCadetes()
     {
-        foreach(var cadete in ListaCadetes)
+        foreach(var cadete in listaCadetes)
         {
             Console.WriteLine($"{cadete.VerId()} | {cadete.VerNombre()}");
-        }
-    }
-
-    public void CargarCadeteria(string rutaCadeteria, string rutaCadetes)
-    {
-        string[] datos = File.ReadAllText(rutaCadeteria).Split(',');
-        nombre = datos[0];
-        telefono = datos[1];
-
-        CargarDatosCadetes(rutaCadetes);
-    }
-
-    public void CargarDatosCadetes(string ruta)
-    {
-        string[] lineas = File.ReadAllLines(ruta);
-
-        foreach(var linea in lineas)
-        {
-            string[] datos = linea.Split(',');
-            var nuevoCadete = new Cadete(int.Parse(datos[0]), datos[1], datos[2], datos[3]);
-            ListaCadetes.Add(nuevoCadete);
         }
     }
 
