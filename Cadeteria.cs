@@ -139,17 +139,18 @@ public class Cadeteria
         }
     }
 
-    public string[] MostrarCadetes(int tamaArreglo)
+    public /*string[]*/ void MostrarCadetes(/*int tamaArreglo*/)
     {
         
-        string[] listaCadetesString = new string[tamaArreglo];
-        int i = 0;
+        /*string[] listaCadetesString = new string[tamaArreglo];
+        int i = 0;*/
         foreach(var cadete in listaCadetes)
         {
-            listaCadetesString[i] = $"{cadete.VerId()} |  {cadete .VerNombre()}";
-            i++;
+            Console.WriteLine($"{cadete.VerId()} |  {cadete.VerNombre()}");
+            /*listaCadetesString[i] = $"{cadete.VerId()} |  {cadete .VerNombre()}";
+            i++;*/
         }
 
-        return listaCadetesString;
+ //       return listaCadetesString;
     }
 }

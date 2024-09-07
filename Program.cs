@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Reflection;
 using System.Linq;
+using DatosDesdeArchivos;
 
 Console.Clear();
 
 Cadeteria Cadeteria = null;
 
-System.Console.WriteLine("Que tipo de acceso quiere usar? 0 = CSV, 1 = JSON");
+Console.WriteLine("Que tipo de acceso quiere usar? 0 = CSV, 1 = JSON");
 int opcionAcceso = int.Parse(Console.ReadLine());
+
 switch (opcionAcceso)
 {
     case 0: var accesoDatosCSV = new AccesoCSV();
@@ -26,12 +28,7 @@ switch (opcionAcceso)
         break;
 }
 
-
-
 int opcion = 0;
-
-System.Console.WriteLine(Cadeteria.NombreCadeteria());
-
 
 while(true)
 {
@@ -108,7 +105,7 @@ while(true)
 
             if (Cadeteria.ExistePedido(NumeroPedido))
             {
-                Cadeteria.MostrarCadetes(Cadeteria.ConsultarCantCadetes());
+                Cadeteria.MostrarCadetes(/*Cadeteria.ConsultarCantCadetes()*/);
                 Console.WriteLine("A que cadete le quiere asignar el pedido? Ingresar su Id: ");
                 int IdCadete = int.Parse(Console.ReadLine());
 
@@ -120,7 +117,6 @@ while(true)
                 {
                     Console.WriteLine("El id ingresado no corresponde a ningun cadete");
                 }
-
             }
             else
             {
