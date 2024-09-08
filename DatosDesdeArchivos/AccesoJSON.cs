@@ -11,9 +11,9 @@ namespace DatosDesdeArchivos
         {
             var stringJson = new HelperJson().AbrirArchivo(rutaCadeteria);
 
-            var cadeteria = JsonSerializer.Deserialize<Cadeteria>(stringJson);
+            var nuevaCadeteria = JsonSerializer.Deserialize<Cadeteria>(stringJson);
 
-            return cadeteria;
+            return nuevaCadeteria;
         }
 
         public override List<Cadete> CargarCadetes(string rutaCadetes)

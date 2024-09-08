@@ -1,6 +1,6 @@
 ﻿using System;
 
-public enum estado
+public enum EstadoPedido
 {
     Cancelado,
     Pendiente,
@@ -10,7 +10,7 @@ public enum estado
 public class Pedidos
 {
     private string observacion;
-    private estado estado;
+    private EstadoPedido estado;
     private int numero;
     private Cliente cliente;
     
@@ -20,12 +20,12 @@ public class Pedidos
     {
         this.numero = new Random().Next(0, 100000); //simulo una eleccion de numero unico para el pedido, ya se que puede repetirse pero bueno
         this.observacion = observacion;
-        this.estado = estado.Pendiente;
+        this.estado = EstadoPedido.Pendiente;
 
         cliente = new Cliente(nombre, direccion, telefono, datosReferenciaDireccion);
     }
 
-    public estado VerEstado()
+    public EstadoPedido VerEstado()
     {
         return estado;
     }
@@ -49,7 +49,7 @@ public class Pedidos
         this.idCadete = idCadete;
     }
 
-    public void CambiarEstado(estado estado)
+    public void CambiarEstado(EstadoPedido estado)
     {
         this.estado = estado;
     }

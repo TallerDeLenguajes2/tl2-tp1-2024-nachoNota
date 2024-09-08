@@ -67,11 +67,12 @@ while(true)
 
         case 2:
             var idCadete = Cadeteria.IdCadeteAleatorio();
-            var idPedido = Cadeteria.IdPedidoPendiente();
-            
-            if(idPedido != -1)
+            var numeroPedido = Cadeteria.ObtenerNumeroPedidoPendiente();
+            bool pedidoEncontrado = numeroPedido != -1;
+
+            if(pedidoEncontrado)
             {
-                Cadeteria.AsignarCadeteAPedido(idCadete, idPedido);
+                Cadeteria.AsignarCadeteAPedido(idCadete, numeroPedido);
                 Console.WriteLine("Pedido asignado con exito");
             }
             else
@@ -82,13 +83,25 @@ while(true)
             break;
 
         case 3:
-            Cadeteria.MostrarPedidosPendientes();
-            Console.WriteLine("A qué pedido le quiere cambiar el estado? Ingrese su numero: ");
-            int numero = int.Parse(Console.ReadLine());
+            string[] arregloPedidosPendientes = Cadeteria.ObtenerPedidosPendientes();
 
-            if (Cadeteria.ExistePedido(numero))
+            foreach (var cadete in arregloPedidosPendientes)
             {
-                Cadeteria.CambiarEstadoPedido(numero);
+                Console.WriteLine(cadete);
+            }
+
+            Console.WriteLine("A qué pedido le quiere cambiar el estado? Ingrese su numero: ");
+            int NumeroPedido = int.Parse(Console.ReadLine());
+
+            if (Cadeteria.ExistePedido(NumeroPedido))
+            {
+                Console.WriteLine($"Cual será el nuevo estado del pedido?");
+                Console.WriteLine("0 = Cancelado");
+                Console.WriteLine("1 = Entregado");
+                Console.Write("Opcion: ");
+                int EstadoElegido = int.Parse(Console.ReadLine());
+
+                Cadeteria.CambiarEstadoPedido(NumeroPedido, EstadoElegido);
             }
             else
             {
@@ -98,14 +111,25 @@ while(true)
             break;
 
         case 4:
-            Cadeteria.MostrarPedidosPendientes();
+            arregloPedidosPendientes = Cadeteria.ObtenerPedidosPendientes();
+
+            foreach(var cadete in arregloPedidosPendientes)
+            {
+                Console.WriteLine(cadete);
+            }
 
             Console.WriteLine("Elija numero del pedido a reasignar: ");
-            int NumeroPedido = int.Parse(Console.ReadLine());
+            NumeroPedido = int.Parse(Console.ReadLine());
 
             if (Cadeteria.ExistePedido(NumeroPedido))
             {
-                Cadeteria.MostrarCadetes(/*Cadeteria.ConsultarCantCadetes()*/);
+                string [] arregloCadetes = Cadeteria.ObtenerCadetes();
+
+                foreach (var cadete in arregloCadetes)
+                {
+                    Console.WriteLine(cadete);
+                }
+
                 Console.WriteLine("A que cadete le quiere asignar el pedido? Ingresar su Id: ");
                 int IdCadete = int.Parse(Console.ReadLine());
 
@@ -134,8 +158,8 @@ var InformeQuery = from cadete in Cadeteria.ListaCadetes
                     select new
                     {
                         Nombre = cadete.VerNombre(),
-                        EnviosCompletados = cadete.ListaPedidos.Count(p => p.VerEstado() == estado.Entregado), //cuento la cant de envios completados que tiene
-                        MontoRecaudado = cadete.ListaPedidos.Where(p => p.VerEstado() == estado.Entregado) //filtro los pedidos para quedarme solo con los que fueron entregados
+                        EnviosCompletados = cadete.ListaPedidos.Count(p => p.VerEstado() == EstadoPedido.Entregado), //cuento la cant de envios completados que tiene
+                        MontoRecaudado = cadete.ListaPedidos.Where(p => p.VerEstado() == EstadoPedido.Entregado) //filtro los pedidos para quedarme solo con los que fueron entregados
                                                         .Sum(p => 500)
                     };
 
