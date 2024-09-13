@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Linq;
 using DatosDesdeArchivos;
+using CadeteriaLibrary;
 
 Console.Clear();
 
@@ -9,6 +10,7 @@ Cadeteria Cadeteria = null;
 
 Console.WriteLine("Que tipo de acceso quiere usar? 0 = CSV, 1 = JSON");
 int opcionAcceso = int.Parse(Console.ReadLine());
+
 
 switch (opcionAcceso)
 {
@@ -28,6 +30,7 @@ switch (opcionAcceso)
         break;
 }
 
+Console.WriteLine(Cadeteria.ConsultarCantCadetes());
 int opcion = 0;
 
 while(true)

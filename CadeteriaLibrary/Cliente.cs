@@ -1,4 +1,5 @@
 ﻿using System;
+namespace CadeteriaLibrary;
 
 public class Cliente
 {

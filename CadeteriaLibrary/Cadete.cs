@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+namespace CadeteriaLibrary;
+
 public class Cadete
 {
     [JsonInclude]

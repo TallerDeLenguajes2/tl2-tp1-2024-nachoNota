@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices.Marshalling;
 using System.Text.Json.Serialization;
 using Microsoft.VisualBasic;
+namespace CadeteriaLibrary;
 
 public class Cadeteria
 {
