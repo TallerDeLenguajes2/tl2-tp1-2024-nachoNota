@@ -48,11 +48,6 @@ public class Cadeteria
         return salario;
     }
 
-    public int ConsultarCantCadetes()
-    {
-        return listaCadetes.Count;
-    }
-
     public void AsignarCadeteAPedido(int idCadete, int idPedido)
     {
         var pedido = listaPedidos.Find(p => p.VerNumero() == idPedido);
@@ -135,13 +130,14 @@ public class Cadeteria
         int cantPedidosPendientes = listaPedidos.Count(p => p.VerEstado() == EstadoPedido.Pendiente);
         string[] arregloPedidosPendientes = new string[cantPedidosPendientes];
         int i = 0;
+        int minimoIdValido = 0;
 
         foreach (var pedido in listaPedidos)
         {
             if (pedido.VerEstado() == EstadoPedido.Pendiente)
             {
                 arregloPedidosPendientes[i] = $"Numero: {pedido.VerNumero()}, Cliente: {pedido.VerCliente().VerNombre()} | " +
-                    $"Cadete: {(pedido.VerIdCadete() >= 0 ? "Asignado" : "Sin Asignar")}";
+                    $"Cadete: {(pedido.VerIdCadete() >= minimoIdValido ? "Asignado" : "Sin Asignar")}";
                 i++;
             }
         }

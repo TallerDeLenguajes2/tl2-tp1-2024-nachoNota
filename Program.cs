@@ -11,7 +11,6 @@ Cadeteria Cadeteria = null;
 Console.WriteLine("Que tipo de acceso quiere usar? 0 = CSV, 1 = JSON");
 int opcionAcceso = int.Parse(Console.ReadLine());
 
-
 switch (opcionAcceso)
 {
     case 0: var accesoDatosCSV = new AccesoCSV();
@@ -30,7 +29,6 @@ switch (opcionAcceso)
         break;
 }
 
-Console.WriteLine(Cadeteria.ConsultarCantCadetes());
 int opcion = 0;
 
 while(true)
@@ -116,9 +114,9 @@ while(true)
         case 4:
             arregloPedidosPendientes = Cadeteria.ObtenerPedidosPendientes();
 
-            foreach(var cadete in arregloPedidosPendientes)
+            foreach(var pedidoPendiente in arregloPedidosPendientes)
             {
-                Console.WriteLine(cadete);
+                Console.WriteLine(pedidoPendiente);
             }
 
             Console.WriteLine("Elija numero del pedido a reasignar: ");
