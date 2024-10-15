@@ -13,9 +13,9 @@ public class Cadeteria
         ListaCadetes = new List<Cadete>();
     }
 
-    public void AsignarPedido(int nroCadete, Pedidos pedido)
+    public void AsignarPedido(int numeroCadete, Pedidos pedido)
     {
-        ListaCadetes[nroCadete].AñadirPedido(pedido);
+        ListaCadetes[numeroCadete].AñadirPedido(pedido);
     }
 
     public Pedidos EncontrarPedido(int nroPedido)
